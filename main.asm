@@ -54,7 +54,7 @@ main:
 	stx $4302 ; source
 	lda #^Tiles
 	sta $4304 ; bank
-	ldx #6240
+	ldx #(End_Tiles-Tiles)
 	stx $4305 ; length
 	lda #1
 	sta $420b ; start dma, channel 0
@@ -74,7 +74,7 @@ main:
 	stx $4302 ; source
 	lda #^Tilemap
 	sta $4304 ; bank
-	ldx #1792
+	ldx #$700
 	stx $4305 ; length
 	lda #1
 	sta $420b ; start dma, channel 0	
@@ -117,11 +117,12 @@ BG_Palette:
 .incbin "ImageConverter/moon.pal"
 
 Tiles:
-; 4bpp tileset 6240 bytes
+; 4bpp tileset
 .incbin "ImageConverter/moon.chr"
+End_Tiles:
 
 Tilemap:
-; 1792 bytes
+; $700 bytes
 .incbin "ImageConverter/moon2.map"
 
 

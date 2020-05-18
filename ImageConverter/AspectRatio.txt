@@ -1,0 +1,8 @@
+A round object didn't look right on a real SNES, due to slightly un-square pixels. The aspect ratio is 8/7 so I resized the moon to 112x128
+
+128x7/8=112
+
+MESEN-S must be set to video / aspect ratio 8/7 to see it the same.
+
+The image was then made 256 pixels wide so superfamiconv produces a correct map.
+Also, reduced indexed to 16 color, then saved as png with NO compression.
