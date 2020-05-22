@@ -22,7 +22,7 @@ main:
 	
 
 	
-; DMA from Palette_Copy to CGRAM
+; DMA from BG_Palette to CGRAM
 	A8
 	stz $2121 ; $2121 cg address = zero
 	
@@ -40,10 +40,11 @@ main:
 	
 	
 ; DMA from Tiles to VRAM	
-	lda #V_INC_1
-	sta vram_inc ; set the increment mode +1
+	lda #V_INC_1 ; the value $80
+	sta vram_inc ; $2115 = set the increment mode +1
 	ldx #$0000
 	stx vram_addr ; set an address in the vram of $0000
+	
 	lda #1
 	sta $4300 ; transfer mode, 2 registers 1 write
 			  ; $2118 and $2119 are a pair Low/High
@@ -89,18 +90,18 @@ main:
 	
 ; a is still 8 bit.
 	lda #1 ; mode 1, tilesize 8x8 all
-	sta bg_size_mode
+	sta bg_size_mode ; $2105
 	
 ; 210b = tilesets for bg 1 and bg 2
 ; (210c for bg 3 and bg 4)
 ; steps of $1000 -321-321... bg2 bg1
-	stz $210b ; both at VRAM address $0000
+	stz bg12_tiles ; $210b both at VRAM address $0000
 	
 	; 2107 map address bg 1, steps of $400, but -54321yx
 	; y/x = map size... 0,0 = 32x32 tiles
 	; $6000 / $100 = $60
 	lda #$60 ; address $6000
-	sta $2107
+	sta tilemap1 ; $2107
 
 	lda #BG1_ON	; only bg 1 is active
 	sta main_screen ; $212c
