@@ -104,8 +104,28 @@ Main:
 
 
 Infinite_Loop:	
+	A8
+	XY16
+	jsr Wait_NMI
 	
+	;code goes here
+
 	jmp Infinite_Loop
+	
+	
+	
+Wait_NMI:
+.a8
+.i16
+;should work fine regardless of size of A
+	lda in_nmi ;load A register with previous in_nmi
+@check_again:	
+	WAI ;wait for an interrupt
+	cmp in_nmi	;compare A to current in_nmi
+				;wait for it to change
+				;make sure it was an nmi interrupt
+	beq @check_again
+	rts
 	
 	
 
@@ -116,15 +136,15 @@ Infinite_Loop:
 
 BG_Palette:
 ; 32 bytes
-.incbin "ImageConverter/moon.pal"
+.incbin "M1TE/moon.pal"
 
 Tiles:
 ; 4bpp tileset
-.incbin "ImageConverter/moon.chr"
+.incbin "M1TE/moon.chr"
 End_Tiles:
 
 Tilemap:
 ; $700 bytes
-.incbin "ImageConverter/moon2.map"
+.incbin "M1TE/moon.map"
 
 

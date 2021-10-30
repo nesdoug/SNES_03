@@ -4,5 +4,4 @@ A round object didn't look right on a real SNES, due to slightly un-square pixel
 
 MESEN-S must be set to video / aspect ratio 8/7 to see it the same.
 
-The image was then made 256 pixels wide so superfamiconv produces a correct map.
-Also, reduced indexed to 16 color, then saved as png with NO compression.
+
