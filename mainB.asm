@@ -61,7 +61,9 @@ Main:
 	UNPACK_TO_VRAM Tilemap
 	
 	
-; a is still 8 bit.
+	;UNPACK_TO_VRAM puts AXY in 16 bit
+	A8
+
 	lda #1 ; mode 1, tilesize 8x8 all
 	sta BGMODE ; $2105
 	
